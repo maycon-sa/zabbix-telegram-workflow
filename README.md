@@ -35,3 +35,13 @@ Para que este workflow funcione, você precisa ter configurado:
 1.  Copie o conteúdo do arquivo `workflows/zabbix-telegram.json`.
 2.  Altere as Variáveis de Ambiente usando o `.env.example` como base e preencha as suas chaves e URLs reais.
 3.  No seu n8n, clique em **Add Workflow** (Adicionar Workflow) e escolha **Import from JSON** (Importar de JSON).
+
+### ⚠️ Requisito Crítico de Compatibilidade do n8n
+
+**ATENÇÃO:** Este workflow utiliza o recurso **Data Tables** dentro dos nós "Code" para estruturar e retornar dados complexos de forma otimizada.
+
+| Recurso | n8n Versão Mínima |
+| :--- | :--- |
+| **Data Tables** (Renderização estruturada nos Code Nodes) | **n8n @1.113 ou superior** |
+
+**Se você estiver em uma versão anterior à n8n @1.113, o workflow NÃO funcionará corretamente** nos nós que dependem dessa funcionalidade. É **obrigatório** atualizar sua instância do n8n para garantir a execução do fluxo.
