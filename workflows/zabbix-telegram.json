@@ -1,0 +1,2613 @@
+{
+  "name": "Problemas Zabbix Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b1bc6936-f891-477b-aef3-dafbe460075c",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        112,
+        -928
+      ],
+      "id": "44cf2449-5b1d-4270-81ea-e485b5e31df9",
+      "name": "Webhook",
+      "webhookId": "b1bc6936-f891-477b-aef3-dafbe460075c"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message",
+          "callback_query"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        400,
+        -96
+      ],
+      "id": "0621611d-09df-479f-ba6b-df975e084198",
+      "name": "Telegram Trigger",
+      "webhookId": "5578e65f-b24b-46e7-af9a-b40ea1e6d651",
+      "credentials": {
+        "telegramApi": {
+          "id": "FjpJrqMKhCjnR1cB",
+          "name": "(CREDENCIAL_TELEGRAM_BOT)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f120573a-eb48-4e9c-a9f4-7e3947152520",
+              "name": "event_id",
+              "value": "={{$json[\"body\"][\"event_id\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "26ba7646-71c3-4efe-b765-dd51e7deadd3",
+              "name": "event_name",
+              "value": "={{$json[\"body\"][\"event_name\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "a049d269-4268-429a-bb7d-3cfc6d76aca9",
+              "name": "host_name",
+              "value": "={{$json[\"body\"][\"host_name\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "e5928258-2bec-4608-865b-246e262c811b",
+              "name": "host_ip",
+              "value": "={{$json[\"body\"][\"host_ip\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "e8b6fb3f-95a4-41e3-ac9b-9c038053a037",
+              "name": "item_name",
+              "value": "={{$json[\"body\"][\"item_name\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "22e5ccaa-15ec-4e37-80b9-6c7495407e65",
+              "name": "item_value",
+              "value": "={{$json[\"body\"][\"item_value\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "ec4b12c2-ed25-4cc5-9282-ac9287c94c0a",
+              "name": "severity",
+              "value": "={{$json[\"body\"][\"severity\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "76b422b5-ee20-4841-9630-d2103c27cf43",
+              "name": "status",
+              "value": "={{$json[\"body\"][\"status\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "e84f460c-3531-4243-a27c-cd6a34e8a1c2",
+              "name": "event_date",
+              "value": "={{$json[\"body\"][\"event_date\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "cf4c4c48-42da-40d5-b9fc-8ef34b3f3618",
+              "name": "recovery_date",
+              "value": "={{$json[\"body\"][\"recovery_date\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "242e9869-856d-4f73-ba5c-2ebfff92de29",
+              "name": "recovery_time",
+              "value": "={{$json[\"body\"][\"recovery_time\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "0635729e-6621-4d0f-80f0-2d0c816acb34",
+              "name": "trigger_id",
+              "value": "={{$json[\"body\"][\"trigger_id\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "986bf79a-6ff0-4fda-9590-d2f40f29dc21",
+              "name": "event_time",
+              "value": "={{$json[\"body\"][\"event_time\"]}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        336,
+        -928
+      ],
+      "id": "ce8d5a0f-b9d4-4c44-a32d-9035a8d5f7a1",
+      "name": "Set (Extrair Json)"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json[\"status\"]}}",
+                    "rightValue": "PROBLEM",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "ce6ef64d-4de4-400c-8f9a-b7031c94501c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PROBLEMA"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3b49edba-f498-48b8-b62d-12d0f483bbc7",
+                    "leftValue": "={{$json[\"status\"]}}",
+                    "rightValue": "RESOLVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "RESOLVIDO"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        544,
+        -928
+      ],
+      "id": "d0f2386a-9740-4b29-b901-c68409b2a6a5",
+      "name": "Switch ( Problema ou Resolução)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $json;\n\n// Criei essa função para garantir que não haja problemas no HTML do Telegram\nfunction escapeHtml(text) {\n  if (typeof text !== 'string') {\n    return text;\n  }\n  return text.replace(/&/g, '&amp;')\n             .replace(/</g, '&lt;')\n             .replace(/>/g, '&gt;')\n             .replace(/\"/g, '&quot;')\n             .replace(/'/g, '&#039;');\n}\n\n// Isso aqui é o callback do botão de histórico que vai na mensagem\nconst historyCallback = `history:${data.trigger_id}`;\n\n// Estrutura da mensagem que decidi enviar no Telegram\nconst body = {\n  chat_id: (TELEGRAM_CHAT_ID),\n  text: `\n🚨 <b>Novo problema detectado no Zabbix!</b>\n\n📌 <b>Host:</b> ${escapeHtml(data.host_name)} (${escapeHtml(data.host_ip)})\n⚡ <b>Trigger:</b> ${escapeHtml(data.event_name)}\n📊 <b>Item:</b> ${escapeHtml(data.item_name)} → ${escapeHtml(data.item_value)}\n🔎 <b>Severidade:</b> ${escapeHtml(data.severity)}\n🕒 <b>Data/Hora:</b> ${escapeHtml(data.event_date)} as ${escapeHtml(data.event_time)}\n`,\n  parse_mode: \"HTML\",\n  reply_markup: {\n    inline_keyboard: [\n      [\n        { text: \"✅ Reconhecer Problema\", callback_data: `ack:${data.event_id}:${data.trigger_id}` }\n      ],\n      [\n        { text: \"📝 Ver Histórico\", callback_data: historyCallback }\n      ],\n      [\n        { text: \"🔄 Pedir Atualização\", callback_data: `update:${data.host_name}:${data.host_ip}` }\n      ]\n    ]\n  }\n};\n\n// Retorno o objeto JSON pronto para o envio\nreturn [{ json: body }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        848,
+        -1120
+      ],
+      "id": "b4ce0df8-408b-4c81-8e60-872c3b068a57",
+      "name": "Code (Formatar Mensagem)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1072,
+        -1120
+      ],
+      "id": "4954c3e2-89fb-4172-9c79-df7eaddea530",
+      "name": "HTTP Request (Envia Problema e Botao de Reconhecer e Histórico)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const callbackData = $json.callback_query.data;\nconst parts = callbackData.split(':');\nconst eventId = parts[1];\nconst triggerId = parts[2];\n\nconst firstName = $json.callback_query.from.first_name || '';\nconst lastName = $json.callback_query.from.last_name || '';\nconst fullName = `${firstName} ${lastName}`.trim();\n\nreturn [{\n  json: {\n    eventId,\n    triggerId,\n    username: $json.callback_query.from.username, // Mantenho o username por segurança, só por garantia\n    fullName\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1232,
+        -240
+      ],
+      "id": "b7958004-7407-4066-a66e-2b48704d9c28",
+      "name": "Code (Extrair Callback_data)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://seu_zabbix/api_jsonrpc.php",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"event.acknowledge\",\n  \"params\": {\n    \"eventids\": [\n      \"{{ $('Code (Extrair Callback_data)').first().json.eventId }}\"\n    ],\n    \"action\": 6,\n    \"message\": \"Reconhecido por {{ $('Code (Extrair Callback_data)').first().json.fullName }}\"\n  },\n  \"id\": 1,\n  \"auth\": \"{{ $json.VALUE }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        -240
+      ],
+      "id": "f84bb4de-a034-4e5f-85b2-1cf3c41b4fda",
+      "name": "HTTP Request (Reconhecer evento)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://seu_zabbix/api_jsonrpc.php",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"trigger.get\",\n  \"params\": {\n    \"triggerids\": [\"{{ $('Code (Extrai Trigger ID)').first().json.triggerId }}\"],\n    \"output\": \"extend\",\n    \"expandDescription\": true\n  },\n  \"auth\": \"{{ $json.VALUE }}\",\n  \"id\": 2\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",{
+  "name": "Problemas Zabbix Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b1bc6936-f891-477b-aef3-dafbe460075c",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        112,
+        -928
+      ],
+      "id": "44cf2449-5b1d-4270-81ea-e485b5e31df9",
+      "name": "Webhook",
+      "webhookId": "b1bc6936-f891-477b-aef3-dafbe460075c"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message",
+          "callback_query"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        400,
+        -96
+      ],
+      "id": "0621611d-09df-479f-ba6b-df975e084198",
+      "name": "Telegram Trigger",
+      "webhookId": "5578e65f-b24b-46e7-af9a-b40ea1e6d651",
+      "credentials": {
+        "telegramApi": {
+          "id": "FjpJrqMKhCjnR1cB",
+          "name": "(CREDENCIAL_TELEGRAM_BOT)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f120573a-eb48-4e9c-a9f4-7e3947152520",
+              "name": "event_id",
+              "value": "={{$json[\"body\"][\"event_id\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "26ba7646-71c3-4efe-b765-dd51e7deadd3",
+              "name": "event_name",
+              "value": "={{$json[\"body\"][\"event_name\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "a049d269-4268-429a-bb7d-3cfc6d76aca9",
+              "name": "host_name",
+              "value": "={{$json[\"body\"][\"host_name\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "e5928258-2bec-4608-865b-246e262c811b",
+              "name": "host_ip",
+              "value": "={{$json[\"body\"][\"host_ip\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "e8b6fb3f-95a4-41e3-ac9b-9c038053a037",
+              "name": "item_name",
+              "value": "={{$json[\"body\"][\"item_name\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "22e5ccaa-15ec-4e37-80b9-6c7495407e65",
+              "name": "item_value",
+              "value": "={{$json[\"body\"][\"item_value\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "ec4b12c2-ed25-4cc5-9282-ac9287c94c0a",
+              "name": "severity",
+              "value": "={{$json[\"body\"][\"severity\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "76b422b5-ee20-4841-9630-d2103c27cf43",
+              "name": "status",
+              "value": "={{$json[\"body\"][\"status\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "e84f460c-3531-4243-a27c-cd6a34e8a1c2",
+              "name": "event_date",
+              "value": "={{$json[\"body\"][\"event_date\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "cf4c4c48-42da-40d5-b9fc-8ef34b3f3618",
+              "name": "recovery_date",
+              "value": "={{$json[\"body\"][\"recovery_date\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "242e9869-856d-4f73-ba5c-2ebfff92de29",
+              "name": "recovery_time",
+              "value": "={{$json[\"body\"][\"recovery_time\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "0635729e-6621-4d0f-80f0-2d0c816acb34",
+              "name": "trigger_id",
+              "value": "={{$json[\"body\"][\"trigger_id\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "986bf79a-6ff0-4fda-9590-d2f40f29dc21",
+              "name": "event_time",
+              "value": "={{$json[\"body\"][\"event_time\"]}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        336,
+        -928
+      ],
+      "id": "ce8d5a0f-b9d4-4c44-a32d-9035a8d5f7a1",
+      "name": "Set (Extrair Json)"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json[\"status\"]}}",
+                    "rightValue": "PROBLEM",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "ce6ef64d-4de4-400c-8f9a-b7031c94501c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PROBLEMA"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3b49edba-f498-48b8-b62d-12d0f483bbc7",
+                    "leftValue": "={{$json[\"status\"]}}",
+                    "rightValue": "RESOLVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "RESOLVIDO"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        544,
+        -928
+      ],
+      "id": "d0f2386a-9740-4b29-b901-c68409b2a6a5",
+      "name": "Switch ( Problema ou Resolução)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $json;\n\n// Função para evitar problemas no HTML do Telegram\nfunction escapeHtml(text) {\n  if (typeof text !== 'string') {\n    return text;\n  }\n  return text.replace(/&/g, '&amp;')\n             .replace(/</g, '&lt;')\n             .replace(/>/g, '&gt;')\n             .replace(/\"/g, '&quot;')\n             .replace(/'/g, '&#039;');\n}\n\n// Callback do botão de histórico (vai junto na mensagem do Telegram)\nconst historyCallback = `history:${data.trigger_id}`;\n\n// Estrutura da mensagem que será enviada para o Telegram\nconst body = {\n  chat_id: (TELEGRAM_CHAT_ID),\n  text: `\n🚨 <b>Novo problema detectado no Zabbix!</b>\n\n📌 <b>Host:</b> ${escapeHtml(data.host_name)} (${escapeHtml(data.host_ip)})\n⚡ <b>Trigger:</b> ${escapeHtml(data.event_name)}\n📊 <b>Item:</b> ${escapeHtml(data.item_name)} → ${escapeHtml(data.item_value)}\n🔎 <b>Severidade:</b> ${escapeHtml(data.severity)}\n🕒 <b>Data/Hora:</b> ${escapeHtml(data.event_date)} as ${escapeHtml(data.event_time)}\n`,\n  parse_mode: \"HTML\",\n  reply_markup: {\n    inline_keyboard: [\n      [\n        { text: \"✅ Reconhecer Problema\", callback_data: `ack:${data.event_id}:${data.trigger_id}` }\n      ],\n      [\n        { text: \"📝 Ver Histórico\", callback_data: historyCallback }\n      ],\n      [\n        { text: \"🔄 Pedir Atualização\", callback_data: `update:${data.host_name}:${data.host_ip}` }\n      ]\n    ]\n  }\n};\n\n// Retorno do objeto pronto para ser enviado\nreturn [{ json: body }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        848,
+        -1120
+      ],
+      "id": "b4ce0df8-408b-4c81-8e60-872c3b068a57",
+      "name": "Code (Formatar Mensagem)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1072,
+        -1120
+      ],
+      "id": "4954c3e2-89fb-4172-9c79-df7eaddea530",
+      "name": "HTTP Request (Envia Problema e Botao de Reconhecer e Histórico)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const callbackData = $json.callback_query.data;\nconst parts = callbackData.split(':');\nconst eventId = parts[1];\nconst triggerId = parts[2];\n\nconst firstName = $json.callback_query.from.first_name || '';\nconst lastName = $json.callback_query.from.last_name || '';\nconst fullName = `${firstName} ${lastName}`.trim();\n\nreturn [{\n  json: {\n    eventId,\n    triggerId,\n    username: $json.callback_query.from.username, // Mantendo o username por segurança\n    fullName\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1232,
+        -240
+      ],
+      "id": "b7958004-7407-4066-a66e-2b48704d9c28",
+      "name": "Code (Extrair Callback_data)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://seu_zabbix/api_jsonrpc.php",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"event.acknowledge\",\n  \"params\": {\n    \"eventids\": [\n      \"{{ $('Code (Extrair Callback_data)').first().json.eventId }}\"\n    ],\n    \"action\": 6,\n    \"message\": \"Reconhecido por {{ $('Code (Extrair Callback_data)').first().json.fullName }}\"\n  },\n  \"id\": 1,\n  \"auth\": \"{{ $json.VALUE }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        -240
+      ],
+      "id": "f84bb4de-a034-4e5f-85b2-1cf3c41b4fda",
+      "name": "HTTP Request (Reconhecer evento)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://seu_zabbix/api_jsonrpc.php",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"trigger.get\",\n  \"params\": {\n    \"triggerids\": [\"{{ $('Code (Extrai Trigger ID)').first().json.triggerId }}\"],\n    \"output\": \"extend\",\n    \"expandDescription\": true\n  },\n  \"auth\": \"{{ $json.VALUE }}\",\n  \"id\": 2\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        -32
+      ],
+      "id": "aafa3d1a-0ba6-4803-9b73-08c1ab6e82e8",
+      "name": "HTTP Request (Buscar info no Zabbix)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const callbackData = $json.callback_query.data;\nconst parts = callbackData.split(':');\nconst triggerId = parts[1];\n\nreturn [{\n  json: {\n    triggerId,\n    chat_id: $json.callback_query.message.chat.id,\n    message_id: $json.callback_query.message.message_id\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1232,
+        -32
+      ],
+      "id": "3c491800-f45b-499a-bffe-d2749f590d73",
+      "name": "Code (Extrai Trigger ID)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\nconst item = items[0].json;\n\n// Busca a contagem de problemas diretamente do item\nconst problemCount = item.problemCount;\n\n// Busca as informações da trigger do array 'result' do item\nconst triggerInfo = item.result[0];\n\nconst body = {\n  chat_id: $('Telegram Trigger').first().json.callback_query.from.id,\n  parse_mode: \"HTML\",\n  text: `\n📝 <b>Histórico da Trigger</b>\n📌 <b>ID:</b> ${triggerInfo.triggerid}\n🖊️ <b>Descrição:</b> ${triggerInfo.description}\n⚠️ <b>Status:</b> ${triggerInfo.status}\n⏱️ <b>Prioridade:</b> ${triggerInfo.priority}\n\n📅 <b>Total de ocorrências hoje:</b> ${problemCount}\n`\n};\n\nresults.push({ json: body });\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2880,
+        -112
+      ],
+      "id": "06cbb1e8-f879-41ce-ab50-167713c5ee9e",
+      "name": "Code (Formatar historico)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot8490011457:AAEcL3_AdiVqhJS8kstVXAfCYmMFbfDzZL0/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3056,
+        -112
+      ],
+      "id": "4d85677f-8ff9-4382-a5ed-05daadd81dc2",
+      "name": "HTTP Request (Envia Historico)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://seu_zabbix/api_jsonrpc.php",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"event.get\",\n  \"params\": {\n    \"output\": \"extend\",\n    \"filter\": {\n      \"name\": \"{{ $('HTTP Request (Buscar info no Zabbix)').first().json.result[0].description }}\"\n    },\n    \"sortfield\": \"clock\",\n    \"sortorder\": \"DESC\",\n    \"source\": \"0\",\n    \"object\": \"0\",\n    \"limit\": \"60\"\n  },\n  \"auth\": \"{{ $('Busca (Zabbix_Token - Consulta)').item.json.VALUE }}\",\n  \"id\": 1\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1968,
+        64
+      ],
+      "id": "ca83e6b7-560e-4b4b-b134-fea2bd241810",
+      "name": "HTTP Request (Buscar ItemID)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Acessa o array de eventos de dentro do primeiro (e único) item\nconst allEvents = items[0].json.result;\n\n// Cria um objeto de data para o início do dia atual (meia-noite)\nconst startOfToday = new Date();\nstartOfToday.setHours(0, 0, 0, 0);\n\n// Converte para timestamp Unix (em segundos)\nconst startOfTodayTimestamp = Math.floor(startOfToday.getTime() / 1000);\n\n// Filtra os eventos que ocorreram do início do dia até agora\nconst filteredEvents = allEvents.filter(event => {\n  return parseInt(event.clock) >= startOfTodayTimestamp;\n});\n\n// A quantidade é o tamanho do array filtrado\nconst problemCount = filteredEvents.length;\n\n// Mapeia os eventos filtrados para um array de horários formatados\nconst problemTimestamps = filteredEvents.map(event => {\n  const date = new Date(parseInt(event.clock) * 1000);\n  return date.toLocaleTimeString('pt-BR');\n});\n\n// Retorna o resultado completo em um único objeto\nreturn [{\n  json: {\n    problemCount: problemCount,\n    problemTimestamps: problemTimestamps.join('\\n'),\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2192,
+        64
+      ],
+      "id": "af43a36e-8f0b-44d2-9924-34ff9da59d63",
+      "name": "Code (Contar Problemas no Dia)"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2416,
+        -16
+      ],
+      "id": "472e596b-45fd-46f2-bd3d-9ec9d09f5d6e",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.callback_query.from.id }}",
+        "text": "={{ $json.content.parts[0].text }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3184,
+        80
+      ],
+      "id": "c35dd0c3-cba7-41c3-9c3e-9f5d3415d778",
+      "name": "Send a text message",
+      "webhookId": "da94652f-f1a9-4e86-8d59-38e5960fb946",
+      "credentials": {
+        "telegramApi": {
+          "id": "0fWUxcfg7NP2wSTv",
+          "name": "(CREDENCIAL_TELEGRAM_BOT)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 21
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        2464,
+        -944
+      ],
+      "id": "b094017a-a20c-48f9-98ba-bac84bbbd5e8",
+      "name": "Schedule Trigger1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://seu_zabbix/api_jsonrpc.php",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"event.get\",\n  \"params\": {\n    \"output\": \"extend\",\n    \"selectHosts\": [\"hostid\",\"host\"],\n    \"sortfield\": \"clock\",\n    \"sortorder\": \"DESC\",\n    \"time_from\": {{ Math.floor(new Date(new Date().setHours(0,0,0,0)).getTime() / 1000) }},\n    \"time_till\": {{ Math.floor(Date.now() / 1000) }}\n  },\n  \"auth\": \"{{ $json.VALUE }}\",\n  \"id\": 1\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2848,
+        -944
+      ],
+      "id": "3453884f-2dfd-46cf-854c-810f324cd6bc",
+      "name": "HTTP Request (Buscar eventos do dia no Zabbix)"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  json: {\n    chat_id: (TELEGRAM_CHAT_ID),\n    parse_mode: \"HTML\",\n    text: `\n📊 <b>Resumo Diário de Ocorrências</b>\n\n📅 Data: ${new Date().toLocaleDateString(\"pt-BR\")}\n🚨 Total de problemas: <b>${$json.totalProblems}</b>\n✅ Total resolvidos: <b>${$json.totalResolved}</b>\n\n🏆 <b>Hosts mais afetados:</b>\n${$json.topHosts}\n\n❗ <b>Ocorrências ainda em aberto:</b>\n${$json.openHosts}\n\n🤖 Relatório gerado automaticamente`\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3264,
+        -944
+      ],
+      "id": "546692e2-a19d-487b-b414-51a8afbd6c15",
+      "name": "Code (Preparar Mensagem para o Telegram)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const events = items[0].json.result || [];\nconst hostStats = {};\n\nfor (const ev of events) {\n  const host = ev.hosts?.[0]?.host || \"Desconhecido\";\n  if (!hostStats[host]) {\n    hostStats[host] = { problems: 0, resolved: 0 };\n  }\n\n  if (ev.value === \"1\") {\n    hostStats[host].problems++;\n  } else if (ev.value === \"0\") {\n    hostStats[host].resolved++;\n  }\n}\n\n// Ordena por quem teve mais problemas\nconst sorted = Object.entries(hostStats).sort((a,b) => b[1].problems - a[1].problems);\n\n// Lista TOP 5 com problemas x resolvidos\nconst topHosts = sorted.slice(0, 5).map(([host, stats], i) =>\n  `${i+1}️⃣ ${host} - ${stats.problems} ocorrências / ${stats.resolved} resolvidas`\n).join(\"\\n\");\n\n// Lista de hosts com ocorrências ainda em aberto\nconst openHosts = sorted\n  .filter(([_, stats]) => stats.problems > stats.resolved) // só quem tem pendente\n  .map(([host, stats]) => \n    `⚠️ ${host} - ${stats.problems - stats.resolved} pendentes`\n  )\n  .join(\"\\n\");\n\nconst totalProblems = sorted.reduce((acc, [,stats]) => acc + stats.problems, 0);\nconst totalResolved = sorted.reduce((acc, [,stats]) => acc + stats.resolved, 0);\n\nreturn [{\n  json: {\n    totalProblems,\n    totalResolved,\n    topHosts,\n    openHosts: openHosts || \"✅ Nenhum problema pendente!\"\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3072,
+        -944
+      ],
+      "id": "0355c26d-2c0d-4b65-b348-27e9fe0e0749",
+      "name": "Code (Processa e conta problemas)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3472,
+        -944
+      ],
+      "id": "35351481-9222-4195-9c7a-3a41522409a1",
+      "name": "HTTP Request (Envia Resumo diario)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Acessa os dados diretamente do webhook de entrada\nconst webhookData = items[0].json;\n\n// Busca os dados do nó \"Set (Extrair Json)\"\nconst resolvedData = $('Set (Extrair Json)').first().json;\n\n// Garante que o texto seja seguro, escapando caracteres HTML\nfunction escapeHtml(text) {\n  if (typeof text !== 'string') {\n    return text;\n  }\n  return text.replace(/&/g, '&amp;')\n            .replace(/</g, '&lt;')\n            .replace(/>/g, '&gt;')\n            .replace(/\"/g, '&quot;')\n            .replace(/'/g, '&#039;');\n}\n\nconst newText = `\n✅✨🎉 <b>RESOLUÇÃO DETECTADA!</b> 🎉✨✅\n\n📌 <b>Host:</b> ${escapeHtml(resolvedData.host_name || '')} (${escapeHtml(resolvedData.host_ip || '')})\n⚡ <b>Trigger:</b> ${escapeHtml(resolvedData.event_name || '')}\n📊 <b>Item:</b> ${escapeHtml(resolvedData.item_name || '')} → ${escapeHtml(resolvedData.item_value || '')}\n🔎 <b>Severidade:</b> ${escapeHtml(resolvedData.severity || '')}\n\n🕒 <b>Início do Problema:</b> ${escapeHtml(resolvedData.event_date || '')} às ${escapeHtml(resolvedData.event_time || '')}\n🕒 <b>Resolvido em:</b> ${escapeHtml(resolvedData.recovery_date || '')} às ${escapeHtml(resolvedData.recovery_time || '')}\n`;\n\n// Retorna o objeto JSON completo para o Telegram usando 'sendMessage'\nreturn [\n  {\n    json: {\n      \"chat_id\": $input.first().json.CHAT_ID, // O ID do seu chat\n      \"text\": newText,\n      \"parse_mode\": \"HTML\",\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1488,
+        -752
+      ],
+      "id": "91f8c488-a9ad-4f45-b30c-6b4a97cbd34b",
+      "name": "Code (Formata Mensagem Resolução)1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const problemData = items[0].json;\n\n// Busca os dados do nó \"Set (Extrair Json)\"\nconst resolvedData = $('Set (Extrair Json)').first().json;\n\n// Função auxiliar para escapar caracteres especiais em HTML\nconst escapeHtml = (unsafe) => {\n  if (unsafe === null || unsafe === undefined) {\n    return '';\n  }\n  return unsafe\n    .toString()\n    .replace(/&/g, \"&amp;\")\n    .replace(/</g, \"&lt;\")\n    .replace(/>/g, \"&gt;\")\n    .replace(/\"/g, \"&quot;\")\n    .replace(/'/g, \"&#039;\");\n};\n\n// Constrói o texto da nova mensagem, escapando apenas as variáveis\nconst newText = `\n✅✨🎉 <b>PROBLEMA RESOLVIDO!</b> 🎉✨✅\n\n📌 <b>Host:</b> ${escapeHtml(problemData.host_name || '')} (${escapeHtml(problemData.host_ip || '')})\n⚡️ <b>Trigger:</b> ${escapeHtml(problemData.event_name || '')}\n📊 <b>Item:</b> ${escapeHtml(problemData.item_name || '')} → ${escapeHtml(problemData.item_value || '')}\n🔎 <b>Severidade:</b> ${escapeHtml(problemData.severity || '')}\n\n🕒 <b>Início do Problema:</b> ${escapeHtml(problemData.event_date || '')} às ${escapeHtml(problemData.event_time || '')}\n🕒 <b>Resolvido em:</b> ${escapeHtml(resolvedData.recovery_date || '')} às ${escapeHtml(resolvedData.recovery_time || '')}\n`;\n\n// Retorna o objeto JSON completo para o Telegram\nreturn [\n  {\n    json: {\n      \"chat_id\": problemData.chat_id,\n      \"message_id\": problemData.message_id,\n      \"text\": newText,\n      \"parse_mode\": \"HTML\",\n      \"reply_markup\": {\n        \"inline_keyboard\": []\n      }\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        -944
+      ],
+      "id": "be6c90d5-eaa2-4ecd-82cf-688d6cd90447",
+      "name": "Code (Formata Mensagem Resolução Editar)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/editMessageText",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1472,
+        -944
+      ],
+      "id": "c7dca6be-cd8f-4f7c-8e19-a81f7f1c6bba",
+      "name": "HTTP Request (Edita Resolução)",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1696,
+        -752
+      ],
+      "id": "701faba0-f090-45c7-85b6-2ff6b685413f",
+      "name": "HTTP Request (Envia Resolução)",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "685be011-4355-48e3-b08e-360d343cdefe",
+                    "leftValue": "={{ $json.callback_query.data }}",
+                    "rightValue": "ack",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Reconhecer"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.callback_query.data }}",
+                    "rightValue": "history",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "9f78f463-2951-425a-8d9e-ef5523d60024"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Historico"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "28a7d35d-ef20-4408-b022-28fe8116721b",
+                    "leftValue": "={{ $json.callback_query.data }}",
+                    "rightValue": "update",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Atualização"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        768,
+        -112
+      ],
+      "id": "3207f2ed-8b0c-4904-963e-b91482e135c1",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "const parts = $json.callback_query.data.split(':');\nconst action = parts[0]; // update\nconst hostName = parts[1];\nconst hostIp = parts[2];\nconst userId = $json.callback_query.from.id; // ID do usuário (chat privado)\n\nreturn [{\n  json: {\n    action,\n    hostName,\n    hostIp,\n    userId\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1232,
+        272
+      ],
+      "id": "27a89a72-0dfe-45aa-b428-8964bb3d9e22",
+      "name": "Code (Extrair dados do callback)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Função para escapar HTML\nfunction escapeHtml(text) {\n  if (typeof text !== 'string') return text;\n  return text.replace(/&/g, '&amp;')\n             .replace(/</g, '&lt;')\n             .replace(/>/g, '&gt;')\n             .replace(/\"/g, '&quot;')\n             .replace(/'/g, '&#039;');\n}\n\n// Dados do callback e do usuário\nconst fullName = $('Code (Extrair Callback_data)').first().json.fullName;\nconst eventId = $('Code (Extrair Callback_data)').first().json.eventId;\nconst triggerId = $('Code (Extrair Callback_data)').first().json.triggerId;\n\n// Recupera a mensagem original enviada no grupo\nconst messageId = $('Telegram Trigger').first().json.callback_query.message.message_id;\nconst chatId = $('Telegram Trigger').first().json.callback_query.message.chat.id;\nlet originalText = $('Telegram Trigger').first().json.callback_query.message.text;\n\n// 🔹 Escapa caracteres problemáticos no texto original (ex.: <>), mas restaura tags <b>\noriginalText = escapeHtml(originalText)\n  .replace(/&lt;b&gt;/g, '<b>')\n  .replace(/&lt;\\/b&gt;/g, '</b>');\n\n// Nova linha de reconhecimento\nconst newAckLine = `✅ <b>Reconhecido por ${escapeHtml(fullName)} às ${new Date().toLocaleTimeString('pt-BR')}</b>`;\n\n// Se já existe seção de reconhecimentos, só adiciona mais um\nif (originalText.includes(\"✅ <b>Reconhecido por\")) {\n  originalText = `${originalText}\\n${newAckLine}`;\n} else {\n  // Primeira vez que alguém reconhece → adiciona separador antes\n  originalText = `${originalText}\\n\\n-------------------------\\n${newAckLine}`;\n}\n\n// Retorna objeto para editMessageText\nreturn [{\n  json: {\n    chat_id: chatId,\n    message_id: messageId,\n    text: originalText,\n    parse_mode: \"HTML\",\n    reply_markup: {\n      inline_keyboard: [\n        [\n          { text: \"✅ Reconhecer Problema\", callback_data: `ack:${eventId}:${triggerId}` }\n        ],\n        [\n          { text: \"🔄 Pedir Atualização\", callback_data: `update:${$input.first().json.host_name}:${$input.first().json.host_ip}` }\n        ],\n        [\n          { text: \"📝 Ver Histórico\", callback_data: `history:${triggerId}` }\n        ]\n      ]\n    }\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2144,
+        -240
+      ],
+      "id": "bc6d27e2-70a4-46b7-a180-b740899c3be8",
+      "name": "Code (Formata Mensagem Reconhecer)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/editMessageText",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2416,
+        -240
+      ],
+      "id": "3f69d3ee-ee00-43ed-b6ca-7aaf15c35fb4",
+      "name": "HTTP Request (Edita Reconhecer)",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "content": "FLUXO COM O RESUMO DIÁRIO",
+        "height": 352,
+        "width": 1840
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2176,
+        -1040
+      ],
+      "typeVersion": 1,
+      "id": "ec32ecfa-2cce-46cb-92f9-cf32367b480a",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://seu_zabbix/api_jsonrpc.php",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"host.get\",\n  \"params\": {\n    \"output\": [\"hostid\", \"host\"],\n    \"filter\": {\n      \"host\": [\"{{ $('Code (Extrair dados do callback)').first().json.hostName }}\"]\n    }\n  },\n  \"auth\": \"{{ $json.VALUE }}\",\n  \"id\": 1\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1696,
+        272
+      ],
+      "id": "b8879486-defb-43ec-a772-40a3c5d14477",
+      "name": "HTTP Request (Busca Hostid no Zabbix)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://seu_zabbix/api_jsonrpc.php",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"item.get\",\n  \"params\": {\n    \"output\": [\"itemid\", \"name\", \"lastvalue\", \"hostid\"],\n    \"hostids\": [\"{{ $json.result[0].hostid }}\"],\n    \"filter\": {\n      \"key_\": \"icmpping\"\n    }\n  },\n  \"auth\": \"{{ $('Busca (Zabbix_Token - Consulta)1').item.json.VALUE }}\",\n  \"id\": 2\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1968,
+        272
+      ],
+      "id": "f3a9417c-ac83-4935-8eae-fb410bedfad5",
+      "name": "HTTP Request (Buscar status ICMP no Zabbix)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2432,
+        272
+      ],
+      "id": "edbc2d29-258d-425c-8d5c-8552c010daef",
+      "name": "HTTP Request (Envia Status do Host)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $json.result[0] || {};\nconst pingStatus = item.lastvalue === \"1\" ? \"ONLINE 🟢\" : \"OFFLINE 🔴\";\n\n// Recupera o nome do host do callback\nconst hostName = $('Code (Extrair dados do callback)').first().json.hostName;\n\nreturn [{\n  json: {\n    chat_id: $('Code (Extrair dados do callback)').first().json.userId, // usuário que clicou\n    parse_mode: \"HTML\",\n    text: `\n🔎 <b>Status Atual do Host</b>\n\n📌 Host: <b>${hostName}</b>\n📡 Status: <b>${pingStatus}</b>\n`\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2176,
+        272
+      ],
+      "id": "e45d286c-cf10-457d-8ebe-845592cc0d9f",
+      "name": "Code (Formatar Resposta do Status do Host)"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "pu1jW3s8rs7KHuXv",
+          "mode": "list",
+          "cachedResultName": "Zabbix_Triggers",
+          "cachedResultUrl": "/projects/SfHucGkZzvhnKXgM/datatables/pu1jW3s8rs7KHuXv"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "event_id",
+              "keyValue": "={{ $json.event_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        832,
+        -912
+      ],
+      "id": "eca3124b-478b-4062-adb1-7bf0f580ce62",
+      "name": "Busca (Event_id - Zabbix_Triggers)",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "zzTeXPtpWcuX2Qvq",
+          "mode": "list",
+          "cachedResultName": "Telegram",
+          "cachedResultUrl": "/projects/SfHucGkZzvhnKXgM/datatables/zzTeXPtpWcuX2Qvq"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "GRUPO_USUARIO",
+              "keyValue": "GRUPO_ALERTAS"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        -752
+      ],
+      "id": "a1dbd66d-4b62-4741-b2ca-fef0c29ec16d",
+      "name": "Busca (Grupo_Alerta)"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "8NEsMFW8Zsgr5e26",
+          "mode": "list",
+          "cachedResultName": "Zabbix_Token",
+          "cachedResultUrl": "/projects/SfHucGkZzvhnKXgM/datatables/8NEsMFW8Zsgr5e26"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "KEY",
+              "keyValue": "RECONHECER"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        -240
+      ],
+      "id": "889ce3a4-3c9a-4e1c-bcac-572d7175c602",
+      "name": "Busca (Zabbix_Token - Reconhecer)"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "8NEsMFW8Zsgr5e26",
+          "mode": "list",
+          "cachedResultName": "Zabbix_Token",
+          "cachedResultUrl": "/projects/SfHucGkZzvhnKXgM/datatables/8NEsMFW8Zsgr5e26"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "KEY",
+              "keyValue": "CONSULTA"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        -32
+      ],
+      "id": "c8572347-f833-476e-bc71-a6c82337a122",
+      "name": "Busca (Zabbix_Token - Consulta)"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "8NEsMFW8Zsgr5e26",
+          "mode": "list",
+          "cachedResultName": "Zabbix_Token",
+          "cachedResultUrl": "/projects/SfHucGkZzvhnKXgM/datatables/8NEsMFW8Zsgr5e26"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "KEY",
+              "keyValue": "CONSULTA"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        272
+      ],
+      "id": "0fe4577c-84e9-4b1c-808a-4634444fd144",
+      "name": "Busca (Zabbix_Token - Consulta)1"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "8NEsMFW8Zsgr5e26",
+          "mode": "list",
+          "cachedResultName": "Zabbix_Token",
+          "cachedResultUrl": "/projects/SfHucGkZzvhnKXgM/datatables/8NEsMFW8Zsgr5e26"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "KEY",
+              "keyValue": "CONSULTA"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        2656,
+        -944
+      ],
+      "id": "332ac49f-fc23-4c43-aed6-48fbdf24a7af",
+      "name": "Busca (Zabbix_Token - Consulta)2"
+    },
+    {
+      "parameters": {
+        "content": "FLUXO QUE ENVIA E EDITA OS PROBLEMAS E RESOLUÇÕES",
+        "height": 752,
+        "width": 1952,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        96,
+        -1184
+      ],
+      "id": "918ecfab-b781-4afe-be09-3610846fefa1",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "FLUXO BOTÕES",
+        "height": 1056,
+        "width": 3584,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        128,
+        -320
+      ],
+      "id": "29b2972e-3ddd-4514-9b88-72beffb99baa",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "pu1jW3s8rs7KHuXv",
+          "mode": "list",
+          "cachedResultName": "Zabbix_Triggers",
+          "cachedResultUrl": "/projects/SfHucGkZzvhnKXgM/datatables/pu1jW3s8rs7KHuXv"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "message_id",
+              "keyValue": "={{ $json.result.message_id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "resolvido": "=true",
+            "status": "={{ $('Set (Extrair Json)').item.json.status }}",
+            "recovery_date": "={{ $('Set (Extrair Json)').item.json.recovery_date }}",
+            "recovery_time": "={{ $('Set (Extrair Json)').item.json.recovery_time }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "event_id",
+              "displayName": "event_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "event_name",
+              "displayName": "event_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "host_name",
+              "displayName": "host_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "host_ip",
+              "displayName": "host_ip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "item_name",
+              "displayName": "item_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "item_value",
+              "displayName": "item_value",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "severity",
+              "displayName": "severity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_date",
+              "displayName": "event_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "recovery_date",
+              "displayName": "recovery_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "recovery_time",
+              "displayName": "recovery_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "trigger_id",
+              "displayName": "trigger_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "event_time",
+              "displayName": "event_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "message_id",
+              "displayName": "message_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "chat_id",
+              "displayName": "chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "resolvido",
+              "displayName": "resolvido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1664,
+        -944
+      ],
+      "id": "51116b1f-0bef-49df-a2b7-edd447c3c2f1",
+      "name": "Atualiza (Zabbix_Trigger - Resolvido)",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "dataTableId": {
+          "__rl": true,
+          "value": "pu1jW3s8rs7KHuXv",
+          "mode": "list",
+          "cachedResultName": "Zabbix_Triggers",
+          "cachedResultUrl": "/projects/SfHucGkZzvhnKXgM/datatables/pu1jW3s8rs7KHuXv"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "message_id",
+              "keyValue": "={{ $json.result.message_id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "event_id": "={{ $('Set (Extrair Json)').item.json.event_id }}",
+            "event_name": "={{ $('Set (Extrair Json)').item.json.event_name }}",
+            "host_name": "={{ $('Set (Extrair Json)').item.json.host_name }}",
+            "host_ip": "={{ $('Set (Extrair Json)').item.json.host_ip }}",
+            "item_name": "={{ $('Set (Extrair Json)').item.json.item_name }}",
+            "item_value": "={{ $('Set (Extrair Json)').item.json.item_value }}",
+            "severity": "={{ $('Set (Extrair Json)').item.json.severity }}",
+            "status": "={{ $('Set (Extrair Json)').item.json.status }}",
+            "event_date": "={{ $('Set (Extrair Json)').item.json.event_date }}",
+            "recovery_date": "={{ $('Set (Extrair Json)').item.json.recovery_date }}",
+            "recovery_time": "={{ $('Set (Extrair Json)').item.json.recovery_time }}",
+            "trigger_id": "={{ $('Set (Extrair Json)').item.json.trigger_id }}",
+            "event_time": "={{ $('Set (Extrair Json)').item.json.event_time }}",
+            "message_id": "={{ $json.result.message_id }}",
+            "chat_id": "={{ $json.result.chat.id }}",
+            "resolvido": "=true"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "event_id",
+              "displayName": "event_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_name",
+              "displayName": "event_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "host_name",
+              "displayName": "host_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "host_ip",
+              "displayName": "host_ip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "item_name",
+              "displayName": "item_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "item_value",
+              "displayName": "item_value",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "severity",
+              "displayName": "severity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_date",
+              "displayName": "event_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "recovery_date",
+              "displayName": "recovery_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "recovery_time",
+              "displayName": "recovery_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "trigger_id",
+              "displayName": "trigger_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_time",
+              "displayName": "event_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "message_id",
+              "displayName": "message_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "chat_id",
+              "displayName": "chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "resolvido",
+              "displayName": "resolvido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1888,
+        -752
+      ],
+      "id": "ee7985f7-cabc-4d87-86af-6b892d518f19",
+      "name": "Atualiza (Zabbix_Trigger - Resolvido)1",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "pu1jW3s8rs7KHuXv",
+          "mode": "list",
+          "cachedResultName": "Zabbix_Triggers",
+          "cachedResultUrl": "/projects/SfHucGkZzvhnKXgM/datatables/pu1jW3s8rs7KHuXv"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "event_id",
+              "keyValue": "={{ $('Code (Extrair Callback_data)').item.json.eventId }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1888,
+        -240
+      ],
+      "id": "5c08f4dc-4bb9-46b2-a8ed-4b894d3b3ffc",
+      "name": "Busca (Zabbix_Triggers - Event_id)"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "pu1jW3s8rs7KHuXv",
+          "mode": "list",
+          "cachedResultName": "Zabbix_Triggers",
+          "cachedResultUrl": "/projects/SfHucGkZzvhnKXgM/datatables/pu1jW3s8rs7KHuXv"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "event_id": "={{ $('Set (Extrair Json)').item.json.event_id }}",
+            "event_name": "={{ $('Set (Extrair Json)').item.json.event_name }}",
+            "host_name": "={{ $('Set (Extrair Json)').item.json.host_name }}",
+            "host_ip": "={{ $('Set (Extrair Json)').item.json.host_ip }}",
+            "item_name": "={{ $('Set (Extrair Json)').item.json.item_name }}",
+            "item_value": "={{ $('Set (Extrair Json)').item.json.item_value }}",
+            "severity": "={{ $('Set (Extrair Json)').item.json.severity }}",
+            "status": "={{ $('Set (Extrair Json)').item.json.status }}",
+            "event_date": "={{ $('Set (Extrair Json)').item.json.event_date }}",
+            "recovery_date": "={{ $('Set (Extrair Json)').item.json.recovery_date }}",
+            "recovery_time": "={{ $('Set (Extrair Json)').item.json.recovery_time }}",
+            "trigger_id": "={{ $('Set (Extrair Json)').item.json.trigger_id }}",
+            "event_time": "={{ $('Set (Extrair Json)').item.json.event_time }}",
+            "message_id": "={{ $json.result.message_id }}",
+            "chat_id": "={{ $json.result.chat.id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "event_id",
+              "displayName": "event_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_name",
+              "displayName": "event_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "host_name",
+              "displayName": "host_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "host_ip",
+              "displayName": "host_ip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "item_name",
+              "displayName": "item_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "item_value",
+              "displayName": "item_value",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "severity",
+              "displayName": "severity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_date",
+              "displayName": "event_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "recovery_date",
+              "displayName": "recovery_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "recovery_time",
+              "displayName": "recovery_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "trigger_id",
+              "displayName": "trigger_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_time",
+              "displayName": "event_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "message_id",
+              "displayName": "message_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "chat_id",
+              "displayName": "chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1296,
+        -1120
+      ],
+      "id": "13cf4b39-4a16-4a4f-81c5-26fc218bcdc9",
+      "name": "Insere Linha (Zabbix_Triggers)"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "61672a36-0c89-4bd9-b780-31f0b78547d7",
+              "leftValue": "={{ $json.event_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "ee09409b-31cd-4cf9-9a71-f29229741b90",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1072,
+        -912
+      ],
+      "id": "7d345425-829d-4d53-913b-5b1b9bfa8689",
+      "name": "If (Tem event_id?)"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "31f59ad7-62bf-432a-8d57-58a860dbc26e",
+              "leftValue": "={{ $json.problemCount }}",
+              "rightValue": 2,
+              "operator": {
+                "type": "number",
+                "operation": "lte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2656,
+        -16
+      ],
+      "id": "712770a2-8260-4907-a060-951fa14a69bf",
+      "name": "If (Tem menos de 2 problemas?"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Você é um assistente NOC.\nHistórico de vezes que deu o problema \"{{ $json.problemCount }}\" no host \"{{ $('HTTP Request (Buscar ItemID)').item.json.result[0].name }}\" e os horarios \"{{ $json.problemTimestamps }}\" e o problema é esse \"{{ $json.result[0].description }}\":\n\n\n\nPergunta: Se existir um padrao, pode sugerir solução mas seja direto e objetivo! A resposta devera ter formataçao para ser enviada via telegram.\n\nMe repasse nesse modelo, nessa formataçao que estou repassando abaixo, nao mude a formatação:\n\n📝 <b>Histórico da Trigger</b>\n📌 <b>ID:</b> {{ $json.result[0].triggerid }} (repassa o valor da trigger que esta nessa variavel)\n🖊️ <b>Descrição:</b> {{ $json.result[0].description }}\n⚠️ <b>Status:</b> {{ $('HTTP Request (Buscar info no Zabbix)').item.json.result[0].status }}\n⏱️ <b>Prioridade:</b> {{ $('HTTP Request (Buscar info no Zabbix)').item.json.result[0].priority }}\n\n📅 <b>Total de ocorrências hoje:</b> {{ $json.problemCount }}\n\n🤖 <b>Análise da IA:</b> Se existir um padrão nos horários ou nos dados das ocorrências, seja direto e objetivo!\n\nUse o dicionario de Tradução para o Status e a Prioridade:\n\n// Dicionários de tradução\nstatus = {\n  \"0\": \"ATIVO\",\n  \"1\": \"DESABILITADO\"\n};\n\nprioridade= {\n  \"0\": \"Não classificado\",\n  \"1\": \"Informação\",\n  \"2\": \"Aviso\",\n  \"3\": \"Média\",\n  \"4\": \"Alta\",\n  \"5\": \"Desastre\"\n};\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        2864,
+        80
+      ],
+      "id": "aa29979e-57f8-4bd6-abee-2d74d9a967b3",
+      "name": "Ia ( Historico de Problemas)",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "kKiEx4yOuwpyuYvo",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set (Extrair Json)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set (Extrair Json)": {
+      "main": [
+        [
+          {
+            "node": "Switch ( Problema ou Resolução)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch ( Problema ou Resolução)": {
+      "main": [
+        [
+          {
+            "node": "Code (Formatar Mensagem)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Busca (Event_id - Zabbix_Triggers)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Formatar Mensagem)": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Envia Problema e Botao de Reconhecer e Histórico)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request (Envia Problema e Botao de Reconhecer e Histórico)": {
+      "main": [
+        [
+          {
+            "node": "Insere Linha (Zabbix_Triggers)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Extrair Callback_data)": {
+      "main": [
+        [
+          {
+            "node": "Busca (Zabbix_Token - Reconhecer)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request (Reconhecer evento)": {
+      "main": [
+        [
+          {
+            "node": "Busca (Zabbix_Triggers - Event_id)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request (Buscar info no Zabbix)": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request (Buscar ItemID)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Extrai Trigger ID)": {
+      "main": [
+        [
+          {
+            "node": "Busca (Zabbix_Token - Consulta)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Formatar historico)": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Envia Historico)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request (Buscar ItemID)": {
+      "main": [
+        [
+          {
+            "node": "Code (Contar Problemas no Dia)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Contar Problemas no Dia)": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "If (Tem menos de 2 problemas?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Busca (Zabbix_Token - Consulta)2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request (Buscar eventos do dia no Zabbix)": {
+      "main": [
+        [
+          {
+            "node": "Code (Processa e conta problemas)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Preparar Mensagem para o Telegram)": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Envia Resumo diario)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Processa e conta problemas)": {
+      "main": [
+        [
+          {
+            "node": "Code (Preparar Mensagem para o Telegram)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Formata Mensagem Resolução)1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Envia Resolução)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Formata Mensagem Resolução Editar)": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Edita Resolução)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Code (Extrair Callback_data)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code (Extrai Trigger ID)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code (Extrair dados do callback)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Extrair dados do callback)": {
+      "main": [
+        [
+          {
+            "node": "Busca (Zabbix_Token - Consulta)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Formata Mensagem Reconhecer)": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Edita Reconhecer)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request (Busca Hostid no Zabbix)": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Buscar status ICMP no Zabbix)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request (Buscar status ICMP no Zabbix)": {
+      "main": [
+        [
+          {
+            "node": "Code (Formatar Resposta do Status do Host)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Formatar Resposta do Status do Host)": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Envia Status do Host)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Busca (Event_id - Zabbix_Triggers)": {
+      "main": [
+        [
+          {
+            "node": "If (Tem event_id?)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Busca (Grupo_Alerta)": {
+      "main": [
+        [
+          {
+            "node": "Code (Formata Mensagem Resolução)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Busca (Zabbix_Token - Reconhecer)": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Reconhecer evento)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Busca (Zabbix_Token - Consulta)": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Buscar info no Zabbix)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Busca (Zabbix_Token - Consulta)1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Busca Hostid no Zabbix)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Busca (Zabbix_Token - Consulta)2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Buscar eventos do dia no Zabbix)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request (Edita Resolução)": {
+      "main": [
+        [
+          {
+            "node": "Atualiza (Zabbix_Trigger - Resolvido)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request (Envia Resolução)": {
+      "main": [
+        [
+          {
+            "node": "Atualiza (Zabbix_Trigger - Resolvido)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Busca (Zabbix_Triggers - Event_id)": {
+      "main": [
+        [
+          {
+            "node": "Code (Formata Mensagem Reconhecer)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If (Tem event_id?)": {
+      "main": [
+        [
+          {
+            "node": "Code (Formata Mensagem Resolução Editar)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Busca (Grupo_Alerta)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If (Tem menos de 2 problemas?": {
+      "main": [
+        [
+          {
+            "node": "Code (Formatar historico)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ia ( Historico de Problemas)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ia ( Historico de Problemas)": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "czFBFBtQQ6ozPWT7",
+    "timezone": "America/Manaus"
+  },
+  "versionId": "181d0cc0-bcc2-48e6-8c39-8fc8ac0fcbfa",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "15ae1ad294f701a0a2320dc5604f5317b589d86a960aa1e7f3a3e270502e0c20"
+  },
+  "id": "wS73kcklOigeOnBY",
+  "tags": []
+}
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        -32
+      ],
+      "id": "aafa3d1a-0ba6-4803-9b73-08c1ab6e82e8",
+      "name": "HTTP Request (Buscar info no Zabbix)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const callbackData = $json.callback_query.data;\nconst parts = callbackData.split(':');\nconst triggerId = parts[1];\n\nreturn [{\n  json: {\n    triggerId,\n    chat_id: $json.callback_query.message.chat.id,\n    message_id: $json.callback_query.message.message_id\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1232,
+        -32
+      ],
+      "id": "3c491800-f45b-499a-bffe-d2749f590d73",
+      "name": "Code (Extrai Trigger ID)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\nconst item = items[0].json;\n\n// Busco a contagem de problemas direto do item\nconst problemCount = item.problemCount;\n\n// Pego as informações da trigger que estão no array 'result' do item\nconst triggerInfo = item.result[0];\n\nconst body = {\n  chat_id: $('Telegram Trigger').first().json.callback_query.from.id,\n  parse_mode: \"HTML\",\n  text: `\n📝 <b>Histórico da Trigger</b>\n📌 <b>ID:</b> ${triggerInfo.triggerid}\n🖊️ <b>Descrição:</b> ${triggerInfo.description}\n⚠️ <b>Status:</b> ${triggerInfo.status}\n⏱️ <b>Prioridade:</b> ${triggerInfo.priority}\n\n📅 <b>Total de ocorrências hoje:</b> ${problemCount}\n`\n};\n\nresults.push({ json: body });\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2880,
+        -112
+      ],
+      "id": "06cbb1e8-f879-41ce-ab50-167713c5ee9e",
+      "name": "Code (Formatar historico)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot8490011457:AAEcL3_AdiVqhJS8kstVXAfCYmMFbfDzZL0/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3056,
+        -112
+      ],
+      "id": "4d85677f-8ff9-4382-a5ed-05daadd81dc2",
+      "name": "HTTP Request (Envia Historico)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://seu_zabbix/api_jsonrpc.php",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"event.get\",\n  \"params\": {\n    \"output\": \"extend\",\n    \"filter\": {\n      \"name\": \"{{ $('HTTP Request (Buscar info no Zabbix)').first().json.result[0].description }}\"\n    },\n    \"sortfield\": \"clock\",\n    \"sortorder\": \"DESC\",\n    \"source\": \"0\",\n    \"object\": \"0\",\n    \"limit\": \"60\"\n  },\n  \"auth\": \"{{ $('Busca (Zabbix_Token - Consulta)').item.json.VALUE }}\",\n  \"id\": 1\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1968,
+        64
+      ],
+      "id": "ca83e6b7-560e-4b4b-b134-fea2bd241810",
+      "name": "HTTP Request (Buscar ItemID)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Acesso o array de eventos de dentro do item\nconst allEvents = items[0].json.result;\n\n// Defino o objeto de data para o início do dia atual (meia-noite) para o filtro\nconst startOfToday = new Date();\nstartOfToday.setHours(0, 0, 0, 0);\n\n// Converto a data para timestamp Unix (em segundos)\nconst startOfTodayTimestamp = Math.floor(startOfToday.getTime() / 1000);\n\n// Filtro os eventos que só ocorreram hoje\nconst filteredEvents = allEvents.filter(event => {\n  return parseInt(event.clock) >= startOfTodayTimestamp;\n});\n\n// A contagem final é o tamanho do array filtrado\nconst problemCount = filteredEvents.length;\n\n// Mapeio os eventos que filtrei para um array de horários formatados\nconst problemTimestamps = filteredEvents.map(event => {\n  const date = new Date(parseInt(event.clock) * 1000);\n  return date.toLocaleTimeString('pt-BR');\n});\n\n// Retorno o resultado completo em um objeto só\nreturn [{\n  json: {\n    problemCount: problemCount,\n    problemTimestamps: problemTimestamps.join('\\n'),\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2192,
+        64
+      ],
+      "id": "af43a36e-8f0b-44d2-9924-34ff9da59d63",
+      "name": "Code (Contar Problemas no Dia)"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2416,
+        -16
+      ],
+      "id": "472e596b-45fd-46f2-bd3d-9ec9d09f5d6e",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.callback_query.from.id }}",
+        "text": "={{ $json.content.parts[0].text }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3184,
+        80
+      ],
+      "id": "c35dd0c3-cba7-41c3-9c3e-9f5d3415d778",
+      "name": "Send a text message",
+      "webhookId": "da94652f-f1a9-4e86-8d59-38e5960fb946",
+      "credentials": {
+        "telegramApi": {
+          "id": "0fWUxcfg7NP2wSTv",
+          "name": "(CREDENCIAL_TELEGRAM_BOT)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 21
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        2464,
+        -944
+      ],
+      "id": "b094017a-a20c-48f9-98ba-bac84bbbd5e8",
+      "name": "Schedule Trigger1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://seu_zabbix/api_jsonrpc.php",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"event.get\",\n  \"params\": {\n    \"output\": \"extend\",\n    \"selectHosts\": [\"hostid\",\"host\"],\n    \"sortfield\": \"clock\",\n    \"sortorder\": \"DESC\",\n    \"time_from\": {{ Math.floor(new Date(new Date().setHours(0,0,0,0)).getTime() / 1000) }},\n    \"time_till\": {{ Math.floor(
