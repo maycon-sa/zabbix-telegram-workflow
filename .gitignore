@@ -1,0 +1,11 @@
+# Arquivos de Ambiente (Contêm credenciais e chaves)
+.env
+.env.production
+.env.development
+
+# Logs e Cache
+*.log
+npm-debug.log*
+
+# Dependências do Node (não devem ser versionadas)
+node_modules
