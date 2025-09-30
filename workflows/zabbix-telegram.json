@@ -586,7 +586,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://api.telegram.org/bot8490011457:AAEcL3_AdiVqhJS8kstVXAfCYmMFbfDzZL0/sendMessage",
+        "url": "=https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{$json}}",
